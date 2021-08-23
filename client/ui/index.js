@@ -2,19 +2,22 @@ var table;
 api_url = "http://127.0.0.1:9999/get_data";
 
 // function getData() {
-//     fetch(api_url, {
-//         headers: {'Content-Type': 'application/json'},
-//         method: 'GET'
-//     })
-//     .then(function(response) {
-//         return response.json();
-//     })
-//     .then(function(text) {
-//         console.log('Request successful', text);
-//     })
-//     .catch(function(error) {
-//         log('Request failed', error)
-//     });
+//     fetch(api_url)
+// 	.then(
+//     function(response) {
+//       if (response.status !== 200) {
+//         console.log('Lỗi, mã lỗi ' + response.status);
+//         return;
+//       }
+//       // parse response data
+//       response.json().then(data => {
+//         console.log(data);
+//       })
+//     }
+// 	)
+// 	.catch(err => {
+// 		console.log('Error :-S', err)
+// 	});
 // }
 
 function initTableData() {
@@ -23,21 +26,19 @@ function initTableData() {
     	//Mofify "responseData" before showing ?
     	var modifiedUsers = responseData.map(eachUser => {
     		return {
-    			first_name: eachUser.first_name,
-				last_name: eachUser.last_name,
+    			full_name: eachUser.first_name + ' ' + eachUser.last_name,
     			email: eachUser.email,
                 address: eachUser.address,
                 city: eachUser.city,
                 phone: eachUser.phone1,
-                web: eachUser.web,
+                web: eachUser.web
     		};
     	});
     	table = $('#users').DataTable({
     	"processing": true,
     	data: modifiedUsers,
     	columns:[
-    		{ data: 'first_name' },
-			{ data: 'last_name' },
+    		{ data: 'full_name' },
     		{ data: 'email' },
     		{ data: 'address' },
     		{ data: 'city' },
