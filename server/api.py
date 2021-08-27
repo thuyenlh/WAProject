@@ -1,6 +1,6 @@
 from flask import Response, json, Flask
 from flask_cors import CORS, cross_origin
-from data import read_file
+from data import final_data
 
 # Create Flask Server BE
 app = Flask(__name__)
@@ -11,7 +11,7 @@ CORS(app)
 @cross_origin(origin='*')
 def get_data():
     try:
-        data = read_file()
+        data = final_data()
         return Response(response=json.dumps(data), status=200, mimetype="application/json")
     except Exception as e:
         print(e)

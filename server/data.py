@@ -1,4 +1,6 @@
 import pandas as pd
+import random
+import time
 
 def read_file():
     data = []
@@ -15,3 +17,24 @@ def read_file():
     data3 = df3.to_dict('records')
     data.extend(data3)
     return data
+
+def str_time_prop(start, end, time_format, prop):
+
+    stime = time.mktime(time.strptime(start, time_format))
+    etime = time.mktime(time.strptime(end, time_format))
+
+    ptime = stime + prop * (etime - stime)
+
+    return time.strftime(time_format, time.localtime(ptime))
+
+
+def random_date(start, end, prop):
+    return str_time_prop(start, end, '%Y', prop)
+
+def final_data():
+    data = read_file()
+    final_data = []
+    for item in data:
+        item['birthday'] = random_date("1980", "2000", random.random())
+        final_data.append(item)
+    return final_data

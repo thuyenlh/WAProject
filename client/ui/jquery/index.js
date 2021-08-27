@@ -25,13 +25,16 @@ function initTableData() {
     $.get(api_url, function(responseData) {
     	//Mofify "responseData" before showing ?
     	var modifiedUsers = responseData.map(eachUser => {
+
     		return {
-    			full_name: eachUser.first_name + ' ' + eachUser.last_name,
+    			full_name: eachUser.first_name + " " + eachUser.last_name,
+				birthday: eachUser.birthday,
     			email: eachUser.email,
                 address: eachUser.address,
                 city: eachUser.city,
-                phone: eachUser.phone1,
-                web: eachUser.web
+                phone1: eachUser.phone1,
+				phone2: eachUser.phone2,
+                web: eachUser.web,
     		};
     	});
     	table = $('#users').DataTable({
@@ -39,10 +42,12 @@ function initTableData() {
     	data: modifiedUsers,
     	columns:[
     		{ data: 'full_name' },
+			{ data: 'birthday'},
     		{ data: 'email' },
     		{ data: 'address' },
     		{ data: 'city' },
-            { data: 'phone' },
+            { data: 'phone1' },
+			{ data: 'phone2' },
             { data: 'web' },
     	]
     	});
